@@ -1,7 +1,5 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
+import javax.crypto.interfaces.PBEKey;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
@@ -13,13 +11,19 @@ public class Writer {
 
         Writer init = new Writer();
         init.searchForContact();
+//        init.addContact();
+//        init.deleteContact();
 
     }
+    HashMap<String, String> map = new HashMap<>();
 //    ***********************************************************************************************
 
 //    ******************************** SCANNER ****************************************
     Scanner sc = new Scanner(System.in);
     //    ***********************************************************************************************
+
+
+
 
     //    *************************** ADD CONTACT METHOD***************************************************
     public void addContact(){
@@ -27,7 +31,7 @@ public class Writer {
             System.out.println("enter a name: ");
             String userName = sc.nextLine();
             System.out.println("enter a phone number");
-            int userPhone = sc.nextInt();
+            String userPhone = sc.nextLine();
 
             bw.write(userName + ":" + userPhone);
             bw.newLine();
@@ -39,9 +43,11 @@ public class Writer {
     //    ***********************************************************************************************
 
     //    ********************************** SEARCH FOR CONTACT METHOD *************************************
-    public HashMap<String, Contact> searchForContact() {
-        HashMap<String, Contact> map = new HashMap<>();
+
+    public HashMap<String, String> searchForContact() {
+//        HashMap<String, Contact> map = new HashMap<>();
 //        vvv DECLARING THIS OUTSIDE OF TRY CATCH TO CLOSE br LATER
+        System.out.println(map);
         BufferedReader br = null;
         try {
 
@@ -52,17 +58,18 @@ public class Writer {
 
             // read file line by line
             while ((line = br.readLine()) != null) {
-                System.out.println(line);
+//
 
 //                PROMPTING THE USER
                 System.out.println("Enter a contacts name:");
                 String userInput = sc.nextLine();
-                for (Contact person : map.values()) {
-                    if (person.getFirstName().contains(userInput)) {
-                        System.out.println(person.getFirstName() + " : " + person.getPhoneNumber());
+//                for (Map.Entry<String, String> person : map.entrySet()) {
+                    if (map.containsKey(userInput)) {
+//                        System.out.println(map.getKey() + " : " + map.getValue());
                     }
 
-                }
+//                }
+                System.out.println(line);
             }
         }
         catch (Exception e) {
@@ -83,5 +90,58 @@ public class Writer {
         return map;
     }
 
+//    public void reader(){
+//        try {
+//            BufferedReader br = new BufferedReader(new FileReader("src/data/contactsList.txt"));
+//            String contents;
+//
+//            while ((contents = br.readLine()) != null) {
+//                System.out.println(contents);
+//            }
+//            br.close();
+//
+//        } catch (Exception e) {
+//            return;
+//        }
+//    }
 
-}
+//    public void deleteContact() {
+//        System.out.println(map);
+//        boolean done = false;
+//        System.out.println("Enter a contact to delete:");
+//        String userInput = sc.nextLine();
+////            if (map.containsKey(userInput)) {
+////                map.remove
+//////                System.out.println(key);
+////            }
+//
+//
+//
+//            try {
+//                BufferedReader currMap = new BufferedReader(new FileReader("src/data/contactsList.txt"));
+//
+//                for (Map.Entry<String, String> person : currMap.entrySet())
+//                    if (map.containsKey(userInput)) {
+//
+//                        map.remove(person.getKey());
+//                        map.remove(person.getValue());
+////                System.out.println(key);
+//                    }
+//
+//
+////                BufferedWriter bw = new BufferedWriter(new FileWriter("src/data/contactsList.txt"));
+////                bw.write(String.valueOf(map));
+////                bw.close();
+//                done = true;
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            if (done == true) {
+//                System.out.println("Success");
+//            }
+//
+//        }
+    }
+
+
+

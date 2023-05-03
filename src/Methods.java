@@ -1,24 +1,23 @@
 //import java.io.BufferedReader;
-//import java.io.BufferedWriter;
 //import java.io.FileReader;
-//import java.io.FileWriter;
 //
-//public class Reader {
+//public class Methods {
 //
-//    public static void main(String[] args) {
+//    public void viewAllContacts() {
 //        try {
 //            BufferedReader br = new BufferedReader(new FileReader("src/data/contactsList.txt"));
 //            String contents;
 //
-//            while ((contents = br.readLine()) != null){
+//            while ((contents = br.readLine()) != null) {
 //                System.out.println(contents);
 //            }
 //            br.close();
 //
-//        }catch (Exception e){
+//        } catch (Exception e) {
 //            return;
 //        }
 //    }
-//
-//
 //}
+//
+//
+

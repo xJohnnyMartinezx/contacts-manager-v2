@@ -33,4 +33,7 @@ public class Contact {
     public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+//    public HashMap<String, Integer> delete(String firstName, int phoneNumber){
+//        this.fi
+//    }
 }
