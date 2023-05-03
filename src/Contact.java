@@ -6,7 +6,7 @@ public class Contact {
     public String firstName;
     public int phoneNumber;
 
-    public HashMap<String, Integer> contactsList;
+//    public HashMap<String, Integer> contactsList;
 
 //    ***** CONSTRUCTOR
 
