@@ -1,21 +1,22 @@
+import java.util.HashMap;
+
 public class Contact {
 
 //    ***** PROPERTIES
-    private String firstName;
-    private String lastName;
-    private String phoneNumber;
+    public String firstName;
+    public int phoneNumber;
+
+    public HashMap<String, Integer> contactsList;
 
 //    ***** CONSTRUCTOR
 
-    public Contact(String firstName, String lastName, String phoneNumber) {
+    public Contact(String firstName, int phoneNumber) {
         this.firstName = firstName;
-        this.lastName = lastName;
         this.phoneNumber = phoneNumber;
     }
 
 
 //    ***** GETTERS AND SETTERS
-
 
     public String getFirstName() {
         return firstName;
@@ -25,19 +26,11 @@ public class Contact {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPhoneNumber() {
+    public int getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 }
