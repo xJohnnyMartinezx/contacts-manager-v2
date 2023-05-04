@@ -1,7 +1,4 @@
-import javax.crypto.interfaces.PBEKey;
 import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 
 public class Writer {
@@ -10,9 +7,10 @@ public class Writer {
     public static void main(String[] args) {
 
         Writer init = new Writer();
-        init.searchForContact();
+//        init.searchForContact();
 //        init.addContact();
 //        init.deleteContact();
+        init.showMap();
 
     }
     HashMap<String, String> map = new HashMap<>();
@@ -21,73 +19,85 @@ public class Writer {
 //    ******************************** SCANNER ****************************************
     Scanner sc = new Scanner(System.in);
     //    ***********************************************************************************************
+    public void showMap(){
+        System.out.println(map);
+    }
 
 
 
 
     //    *************************** ADD CONTACT METHOD***************************************************
     public void addContact(){
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("src/data/contactsList.txt", true))){
+        BufferedWriter bw = null;
+
+        try {
+            bw = new BufferedWriter(new FileWriter("src/data/contactsList.txt", true));
             System.out.println("enter a name: ");
             String userName = sc.nextLine();
             System.out.println("enter a phone number");
             String userPhone = sc.nextLine();
+            map.put(userName,userPhone);
 
-            bw.write(userName + ":" + userPhone);
-            bw.newLine();
+            // iterate map entries
+            for (Map.Entry<String, String> entry : map.entrySet()) {
 
-        }catch (Exception e){
-            System.out.println("error");
+                // put key and value separated by a colon
+                bw.write(entry.getKey() + ":"
+                        + entry.getValue());
+
+                // new line
+                bw.newLine();
+            }
+
+            bw.flush();
+
+            System.out.println("Would you like to enter another?");
+            String userContinue = sc.nextLine();
+            if (userContinue.equalsIgnoreCase("y")){
+                addContact();
+            }
         }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+
+            try {
+
+                // always close the writer
+                bw.close();
+            }
+            catch (Exception e) {
+            }
+        }
+        System.out.println("line 83: " + map);
     }
     //    ***********************************************************************************************
 
     //    ********************************** SEARCH FOR CONTACT METHOD *************************************
 
-    public HashMap<String, String> searchForContact() {
-//        HashMap<String, Contact> map = new HashMap<>();
-//        vvv DECLARING THIS OUTSIDE OF TRY CATCH TO CLOSE br LATER
-        System.out.println(map);
-        BufferedReader br = null;
+    public void searchForContact() {
         try {
 
             // create BufferedReader object from the File
-            br = new BufferedReader(new FileReader("src/data/contactsList.txt"));
-
-            String line = null;
-
-            // read file line by line
-            while ((line = br.readLine()) != null) {
+           BufferedReader br = new BufferedReader(new FileReader("src/data/contactsList.txt"));
 //
 
 //                PROMPTING THE USER
                 System.out.println("Enter a contacts name:");
                 String userInput = sc.nextLine();
-//                for (Map.Entry<String, String> person : map.entrySet()) {
-                    if (map.containsKey(userInput)) {
-//                        System.out.println(map.getKey() + " : " + map.getValue());
-                    }
+            String contents;
 
-//                }
-                System.out.println(line);
+            while ((contents = br.readLine()) != null) {
+                if (contents.contains(userInput)) {
+                    System.out.println(contents);
+                }
             }
+            br.close();
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-        finally {
-
-            // Always close the BufferedReader
-            if (br != null) {
-                try {
-                    br.close();
-                }
-                catch (Exception e) {
-                };
-            }
-        }
-
-        return map;
     }
 
 //    public void reader(){
@@ -105,42 +115,10 @@ public class Writer {
 //        }
 //    }
 
-//    public void deleteContact() {
-//        System.out.println(map);
-//        boolean done = false;
-//        System.out.println("Enter a contact to delete:");
-//        String userInput = sc.nextLine();
-////            if (map.containsKey(userInput)) {
-////                map.remove
-//////                System.out.println(key);
-////            }
-//
-//
-//
-//            try {
-//                BufferedReader currMap = new BufferedReader(new FileReader("src/data/contactsList.txt"));
-//
-//                for (Map.Entry<String, String> person : currMap.entrySet())
-//                    if (map.containsKey(userInput)) {
-//
-//                        map.remove(person.getKey());
-//                        map.remove(person.getValue());
-////                System.out.println(key);
-//                    }
-//
-//
-////                BufferedWriter bw = new BufferedWriter(new FileWriter("src/data/contactsList.txt"));
-////                bw.write(String.valueOf(map));
-////                bw.close();
-//                done = true;
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//            if (done == true) {
-//                System.out.println("Success");
-//            }
-//
-//        }
+    public void deleteContact() {
+
+
+        }
     }
 
 
